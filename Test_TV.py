@@ -45,7 +45,10 @@ class Test_TV:
         self.channel_enter= tkinter.Button(GUI, text="Enter", command=self.enter_volume)
         self.channel_enter.pack(pady=10)
     # Volume Up and Down Buttons
-
+        self.volume_up_button = tkinter.Button(GUI, text="Volume Up", command=self.volume_up)
+        self.volume_up_button.pack()
+        self.volume_down_button = tkinter.Button(GUI, text="Volume Down", command=self.volume_down)
+        self.volume_down_button.pack(pady=10)
 
 #Def for button functions
     #def for power button command
@@ -59,8 +62,19 @@ class Test_TV:
     
     #def for enter channel command
     def enter_channel (self):
-        entry=int(self.channel_entry.get()) 
-        self.tv.set_Channel(entry)
+        try:
+            if not self.tv.on:
+                messagebox.showinfo("Error", "Please turn on Power")
+            entry = self.channel_entry.get()
+            if entry:
+                entry=int(self.channel_entry.get()) 
+                self.tv.set_Channel(entry)
+            elif not isinstance (entry, int):
+                raise TypeError
+            else:
+                messagebox.showinfo("Error", "Please enter a channel value")
+        except:
+            messagebox.showerror("TypeError", "Channel must be an integer")
 
     #def for channel up command
     def channel_up(self):
@@ -78,6 +92,18 @@ class Test_TV:
     def enter_volume (self):
         entry=int(self.volume_entry.get()) 
         self.tv.set_Volume_Level(entry)
+
+    #def for volume up command
+    def volume_up(self):
+        self.tv.volume_Up()
+        self.channel_entry.delete(0, tkinter.END)
+        self.channel_entry.insert(0, str(self.tv.get_Volume_Level()))
+
+    #def for volume down command
+    def volume_down(self):
+        self.tv.volume_Down()
+        self.channel_entry.delete(0, tkinter.END)
+        self.channel_entry.insert(0, str(self.tv.get_Volume_Level()))
 #starts the event loop of the GUI application
 GUI = tkinter.Tk()
 GUI.title("TV Control Panel")
