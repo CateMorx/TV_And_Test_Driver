@@ -43,12 +43,12 @@ class Test_TV:
         self.tv1.channel_down_button.grid(row=5, column=0, padx=5, pady=5)
 
     # Volume Label and Entry
-        self.volume_label = tkinter.Label(GUI, text="Volume")
-        self.volume_label.grid(row=6, column=0, padx=5, pady=5)
-        self.volume_entry = tkinter.Entry(GUI)
-        self.volume_entry.grid(row=7, column=0, padx=5, pady=5)
-        self.channel_enter= tkinter.Button(GUI, text="Enter", command=self.enter_volume)
-        self.channel_enter.grid(row=8, column=0, padx=5, pady=5)
+        self.tv1.volume_label = tkinter.Label(GUI, text="Volume of TV 1")
+        self.tv1.volume_label.grid(row=6, column=0, padx=5, pady=5)
+        self.tv1.volume_entry = tkinter.Entry(GUI)
+        self.tv1.volume_entry.grid(row=7, column=0, padx=5, pady=5)
+        self.tv1.channel_enter= tkinter.Button(GUI, text="Enter", command=self.enter_volume)
+        self.tv1.channel_enter.grid(row=8, column=0, padx=5, pady=5)
     # Volume Up and Down Buttons
         self.volume_up_button = tkinter.Button(GUI, text="Volume Up", command=self.volume_up)
         self.volume_up_button.grid(row=9, column=0, padx=5, pady=5)
@@ -69,6 +69,13 @@ class Test_TV:
         self.tv2.channel_down_button = tkinter.Button(GUI, text="Channel Down", command=self.channel_down_tv2)
         self.tv2.channel_down_button.grid(row=5, column=1, padx=5, pady=5)
 
+    # Volume Label and Entry
+        self.tv2.volume_label = tkinter.Label(GUI, text="Volume of TV 2")
+        self.tv2.volume_label.grid(row=6, column=1, padx=5, pady=5)
+        self.tv2.volume_entry = tkinter.Entry(GUI)
+        self.tv2.volume_entry.grid(row=7, column=1, padx=5, pady=5)
+        self.tv2.channel_enter= tkinter.Button(GUI, text="Enter", command=self.enter_volume_tv2)
+        self.tv2.channel_enter.grid(row=8, column=1, padx=5, pady=5)
     #Print button
         self.prints = tkinter.Button(GUI, text="Print", command=self.prints)
         self.prints.grid(row=11, column=0, padx=5, pady=5)
@@ -89,7 +96,7 @@ class Test_TV:
             self.tv1.turn_On()
             self.tv1.power_button.config(text="Power: On")
 
-    #def for power button command
+    #def for power button command for tv2
     def toggle_power_tv2(self):
         if self.tv2.on:
             self.tv2.turn_Off()
@@ -102,7 +109,7 @@ class Test_TV:
     def enter_channel (self):
         try:
             if not self.tv1.on:
-                messagebox.showinfo("Error", "Please turn on Power")
+                messagebox.showinfo("Error", "Please turn on Power on TV 1")
             entry = self.tv1.channel_entry.get()
             if entry:
                 entry=int(self.tv1.channel_entry.get()) 
@@ -111,31 +118,31 @@ class Test_TV:
             elif not isinstance (entry, int):
                 raise TypeError
             else:
-                messagebox.showinfo("Error", "Please enter a channel value")
+                messagebox.showinfo("Error", "Please enter a channel value for TV 1")
         except:
-            messagebox.showerror("TypeError", "Channel must be an integer")
+            messagebox.showerror("TypeError", "Channel for TV 1 must be an integer")
 
 
     def enter_channel_tv2 (self):
         try:
             if not self.tv2.on:
-                messagebox.showinfo("Error", "Please turn on Power")
+                messagebox.showinfo("Error", "Please turn on Power for TV 2")
             entry = self.tv2.channel_entry.get()
             if entry:
                 entry=int(self.tv2.channel_entry.get()) 
                 self.tv2.set_Channel(entry)
                 self.number_of_enter_channel_tv2 = 1
             else:
-                messagebox.showinfo("Error", "Please enter a channel value")
+                messagebox.showinfo("Error", "Please enter a channel value for TV 2")
         except ValueError:
-            messagebox.showerror("TypeError", "Channel must be an integer")
+            messagebox.showerror("TypeError", "Channel for TV 2 must be an integer")
 
     #def for channel up command
     def channel_up(self):
         if not self.tv1.on:
-             messagebox.showinfo("Error", "Please turn on Power")
+             messagebox.showinfo("Error", "Please turn on Power for TV 1")
         elif self.number_of_enter_channel_tv1 == 0:
-            messagebox.showinfo("Error", "Please Enter Your Channel First")
+            messagebox.showinfo("Error", "Please Enter the Channel for TV 1 First")
         else: 
             self.tv1.channel_Up()
             self.tv1.channel_entry.delete(0, tkinter.END)
@@ -144,9 +151,9 @@ class Test_TV:
     #def for channel down command
     def channel_down(self):
         if not self.tv1.on:
-             messagebox.showinfo("Error", "Please turn on Power")
+             messagebox.showinfo("Error", "Please turn on Powerfor TV 1")
         elif self.number_of_enter_channel_tv1 == 0:
-            messagebox.showinfo("Error", "Please Enter Your Channel First")
+            messagebox.showinfo("Error", "Please Enter the Channel for TV 1 First")
         else: 
             self.tv1.channel_Down()
             self.tv1.channel_entry.delete(0, tkinter.END)
@@ -155,9 +162,9 @@ class Test_TV:
     #def for channel up command for TV 2
     def channel_up_tv2(self):
         if not self.tv2.on:
-             messagebox.showinfo("Error", "Please turn on Power")
+             messagebox.showinfo("Error", "Please turn on Power for TV 2")
         elif self.number_of_enter_channel_tv2 == 0:
-            messagebox.showinfo("Error", "Please Enter Your Channel First")
+            messagebox.showinfo("Error", "Please Enter the Channel  for TV 2 First")
         else: 
             self.tv2.channel_Up()
             self.tv2.channel_entry.delete(0, tkinter.END)
@@ -166,32 +173,48 @@ class Test_TV:
     #def for channel down command for Tv2
     def channel_down_tv2(self):
         if not self.tv2.on:
-             messagebox.showinfo("Error", "Please turn on Power")
+             messagebox.showinfo("Error", "Please turn on Power  for TV 2")
         elif self.number_of_enter_channel_tv2 == 0:
-            messagebox.showinfo("Error", "Please Enter Your Channel First")
+            messagebox.showinfo("Error", "Please Enter the Channel  for TV 2 First")
         else: 
             self.tv2.channel_Down()
             self.tv2.channel_entry.delete(0, tkinter.END)
             self.tv2.channel_entry.insert(0, str(self.tv2.get_Channel()))
 
 
-    #def for enter volume command for Tv2
+    #def for enter volume command
     def enter_volume (self):
         try:
-            if not self.tv.on:
-                messagebox.showinfo("Error", "Please turn on Power")
-            entry = self.volume_entry.get()
+            if not self.tv1.on:
+                messagebox.showinfo("Error", "Please turn on Power  for TV 1")
+            entry = self.tv1.volume_entry.get()
             if entry:
-                entry=int(self.volume_entry.get()) 
-                self.tv.set_Volume_Level(entry)
+                entry=int(self.tv1.volume_entry.get()) 
+                self.tv1.set_Volume_Level(entry)
                 self.number_of_enter_volume_tv1 = 1
             elif not isinstance (entry, int):
                 raise TypeError
             else:
-                messagebox.showinfo("Error", "Please enter a volume value")
+                messagebox.showinfo("Error", "Please enter a volume value  for TV 1")
         except:
-            messagebox.showerror("TypeError", "Volume must be an integer")
+            messagebox.showerror("TypeError", "Volume  for TV 1 must be an integer")
 
+#def for enter volume command for Tv2
+    def enter_volume_tv2 (self):
+        try:
+            if not self.tv2.on:
+                messagebox.showinfo("Error", "Please turn on Power for TV 2")
+            entry = self.tv2.volume_entry.get()
+            if entry:
+                entry=int(self.tv1.volume_entry.get()) 
+                self.tv2.set_Volume_Level(entry)
+                self.number_of_enter_volume_tv2 = 1
+            elif not isinstance (entry, int):
+                raise TypeError
+            else:
+                messagebox.showinfo("Error", "Please enter a volume value for TV 2")
+        except:
+            messagebox.showerror("TypeError", "Volume  for TV 2 must be an integer")
     #def for volume up command
     def volume_up(self):
         if not self.tv.on:
