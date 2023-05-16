@@ -38,7 +38,15 @@ class Test_TV:
         self.channel_down_button.pack(pady=10)
 
     # Volume Label and Entry
+        self.volume_label = tkinter.Label(GUI, text="Volume")
+        self.volume_label.pack()
+        self.volume_entry = tkinter.Entry(GUI)
+        self.volume_entry.pack()
+        self.channel_enter= tkinter.Button(GUI, text="Enter", command=self.enter_volume)
+        self.channel_enter.pack(pady=10)
     # Volume Up and Down Buttons
+
+
 #Def for button functions
     #def for power button command
     def toggle_power(self):
@@ -65,6 +73,11 @@ class Test_TV:
         self.tv.channel_Down()
         self.channel_entry.delete(0, tkinter.END)
         self.channel_entry.insert(0, str(self.tv.get_Channel()))
+
+    #def for enter volume command
+    def enter_volume (self):
+        entry=int(self.volume_entry.get()) 
+        self.tv.set_Volume_Level(entry)
 #starts the event loop of the GUI application
 GUI = tkinter.Tk()
 GUI.title("TV Control Panel")
