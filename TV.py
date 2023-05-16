@@ -19,7 +19,14 @@ class TV:
     def turn_Off(self):
         self.on = False
     #Create def that retrieves the value of channel
+    def get_Channel(self):
+        return self.channel
     #Create def for setting channel value
+    def set_Channel(self, channel):
+        if self.on and 1 <= channel <= 120:
+            self.channel = channel
+            return self.channel
+
     #Create def that retrieves the value of volume
     #Create def for setting volume value
     #Def that increases channel level by 1
