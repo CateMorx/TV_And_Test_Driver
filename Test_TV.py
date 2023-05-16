@@ -29,7 +29,7 @@ class Test_TV:
         self.tv2.power_button.grid(row=0, column=1, padx=5, pady=5)
 
     # Channel Label and Entry
-        self.tv1.channel_label = tkinter.Label(GUI, text="Channel of Tv 1")
+        self.tv1.channel_label = tkinter.Label(GUI, text="Channel of TV 1")
         self.tv1.channel_label.grid(row=1, column=0, padx=5, pady=5)
         self.tv1.channel_entry = tkinter.Entry(GUI)
         self.tv1.channel_entry.grid(row=2, column=0, padx=5, pady=5)
@@ -213,7 +213,7 @@ class Test_TV:
                 messagebox.showinfo("Error", "Please turn on Power for TV 2")
             entry = self.tv2.volume_entry.get()
             if entry:
-                entry=int(self.tv1.volume_entry.get()) 
+                entry=int(self.tv2.volume_entry.get()) 
                 self.tv2.set_Volume_Level(entry)
                 self.number_of_enter_volume_tv2 = 1
             elif not isinstance (entry, int):
@@ -248,7 +248,7 @@ class Test_TV:
     def volume_up_tv2(self):
         if not self.tv2.on:
              messagebox.showinfo("Error", "Please turn on Power")
-        elif self.number_of_enter_volume_tv1 == 0:
+        elif self.number_of_enter_volume_tv2 == 0:
             messagebox.showinfo("Error", "Please Enter Your Volume First")
         else: 
             self.tv2.volume_Up()
@@ -259,7 +259,7 @@ class Test_TV:
     def volume_down_tv2(self):
         if not self.tv2.on:
              messagebox.showinfo("Error", "Please turn on Power")
-        elif self.number_of_enter_volume_tv1 == 0:
+        elif self.number_of_enter_volume_tv2 == 0:
             messagebox.showinfo("Error", "Please Enter Your Volume First")
         else:
             self.tv2.volume_Down()
@@ -269,12 +269,12 @@ class Test_TV:
 
     #def for print command
     def prints(self):
-        if not self.tv.on:
-             messagebox.showinfo("Error", "Please turn on Power")
-        elif self.number_of_enter_volume_tv1 == 0 or self.number_of_enter_channel_tv1 == 0:
+        if not self.tv1.on or not self.tv2.on:
+             messagebox.showinfo("Error", "Please turn on Power of both TVs First")
+        elif self.number_of_enter_volume_tv1 == 0 or self.number_of_enter_channel_tv1==0 or self.number_of_enter_volume_tv2 == 0 or self.number_of_enter_channel_tv2== 0 :
             messagebox.showinfo("Error", "Please Enter Your Volume or Channel First")
         else:
-            messagebox.showinfo("Volume and Channel","tv1's channel is "+ str(tv1.channel_entry.get())+ " and volume level is "+ str(self.volume_entry.get()) +"\ntv2's channel is "+ str(tv2.channel_entry.get())+ " and volume level is "+ str(self.volume_entry.get()))
+            messagebox.showinfo("Volume and Channel","tv1's channel is "+ str(self.tv1.channel_entry.get())+ " and volume level is "+ str(self.tv1.volume_entry.get()) +"\ntv2's channel is "+ str(self.tv2.channel_entry.get())+ " and volume level is "+ str(self.tv2.volume_entry.get()))
 
 
 #starts the event loop of the GUI application
