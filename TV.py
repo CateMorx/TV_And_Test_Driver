@@ -6,14 +6,23 @@
 #Tv2's channel is 3 and volume level is 2
 
 #Create class TV
-#Create def for attributes
-#Create def for Turn on
-#Create def for Turn off
-#Create def that retrieves the value of channel
-#Create def for setting channel value
-#Create def that retrieves the value of volume
-#Create def for setting volume value
-#Def that increases channel level by 1
-#Def that decreases channel level by 1
-#Def that increases volume level by 1
-#Def that decreases volume level by 1
+class TV:
+    #Create def for attributes
+    def __init__(self):
+        self.channel = 1
+        self.volumeLevel = 1
+        self.on = False
+    #Create def for Turn on
+    def turn_On(self):
+        self.on = True
+    #Create def for Turn off
+    def turn_Off(self):
+        self.on = False
+    #Create def that retrieves the value of channel
+    #Create def for setting channel value
+    #Create def that retrieves the value of volume
+    #Create def for setting volume value
+    #Def that increases channel level by 1
+    #Def that decreases channel level by 1
+    #Def that increases volume level by 1
+    #Def that decreases volume level by 1
