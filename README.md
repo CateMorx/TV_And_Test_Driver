@@ -1,4 +1,24 @@
 # TV_And_Test_Driver
+A Python Code for creating the Class named TV and a Test Driver program named TestTV that will create two objects from Class TV. The two classes are separated into two Python program, "TV" and "TestTV". The program exhibits the following features: 
+
+Creates 2 objects, TV_1 and TV_2
+
+The class "TV" will have the attributes, "channel", "volumelevel", and "on"
+
+Has the ability to:
+
+Turn the TV on and off
+
+Set the channel between 1-120
+
+Set the volume level between 1-7
+
+Increase or decrease both the channel and volume level by 1
+
+print the channel and volume level of the 2 objects
+
+# Demo
+
 
 # Needed Module
 Tkinter
