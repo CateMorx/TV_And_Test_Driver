@@ -5,6 +5,9 @@
 #Tv1's channel is 30 and volume level is 3
 #Tv2's channel is 3 and volume level is 2
 
+#Imports necessary modules and elements
+import tkinter as tkinter
+from tkinter import messagebox
 #Create class TV
 class TV:
     #Create def for attributes
@@ -31,9 +34,9 @@ class TV:
             elif not channel:
                 raise ValueError
         except TypeError:
-            print ("Channel must be an integer")
+            messagebox.showerror("TypeError", "Channel must be an integer")
         except ValueError:
-            print("Channel must be between 1-120")
+            messagebox.showerror("ValueError", "Channel must be between 1-120")
         else:
             if self.on and 1 <= channel <= 120:
                 self.channel = channel
@@ -44,9 +47,17 @@ class TV:
         return self.volumeLevel
     #Create def for setting volume value
     def set_Volume_Level(self, volumeLevel):
-        if self.on and 1 <= volumeLevel <= 7:
-            self.volumeLevel = volumeLevel
-            return self.volumeLevel
+        try:
+            if not isinstance(volumeLevel, int):
+                raise ValueError
+            elif not (1 <= volumeLevel <= 7):
+                raise ValueError
+            if self.on and 1 <= volumeLevel <= 7:
+                self.volumeLevel = volumeLevel
+                return self.volumeLevel
+        except ValueError:
+            messagebox.showerror("ValueError", "Volume must be between 1-7")
+            
     #Def that increases channel level by 1
     def channel_Up(self):
         if self.on and 1<=self.channel < 120:
