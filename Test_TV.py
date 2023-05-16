@@ -85,9 +85,14 @@ class Test_TV:
 
     #def for channel up command
     def channel_up(self):
-        self.tv.channel_Up()
-        self.channel_entry.delete(0, tkinter.END)
-        self.channel_entry.insert(0, str(self.tv.get_Channel()))
+        if not self.tv.on:
+             messagebox.showinfo("Error", "Please turn on Power")
+        elif self.number_of_enter_channel== 0:
+            messagebox.showinfo("Error", "Please Enter Your Channel First")
+        else: 
+            self.tv.channel_Up()
+            self.channel_entry.delete(0, tkinter.END)
+            self.channel_entry.insert(0, str(self.tv.get_Channel()))
 
     #def for channel down command
     def channel_down(self):
@@ -102,14 +107,20 @@ class Test_TV:
 
     #def for enter volume command
     def enter_volume (self):
-        if not self.tv.on:
-             messagebox.showinfo("Error", "Please turn on Power")
-        elif self.number_of_enter_channel== 0:
-            messagebox.showinfo("Error", "Please Enter Your Channel First")
-        else:
-            entry=int(self.volume_entry.get()) 
-            self.tv.set_Volume_Level(entry)
-            self.number_of_enter_volume= 1
+        try:
+            if not self.tv.on:
+                messagebox.showinfo("Error", "Please turn on Power")
+            entry = self.volume_entry.get()
+            if entry:
+                entry=int(self.volume_entry.get()) 
+                self.tv.set_Volume_Level(entry)
+                self.number_of_enter_volume= 1
+            elif not isinstance (entry, int):
+                raise TypeError
+            else:
+                messagebox.showinfo("Error", "Please enter a volume value")
+        except:
+            messagebox.showerror("TypeError", "Volume must be an integer")
 
     #def for volume up command
     def volume_up(self):
