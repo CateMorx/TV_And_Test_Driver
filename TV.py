@@ -36,6 +36,20 @@ class TV:
             self.volumeLevel = volumeLevel
             return self.volumeLevel
     #Def that increases channel level by 1
+    def channel_Up(self):
+        if self.on and 1<=self.channel < 120:
+            self.channel += 1
+
     #Def that decreases channel level by 1
+    def channel_Down(self):
+        if self.on and self.channel > 1:
+            self.channel -= 1
+
     #Def that increases volume level by 1
+    def volume_Up(self):
+        if self.on and self.volumeLevel < 7:
+            self.volumeLevel += 1
     #Def that decreases volume level by 1
+    def volume_Down(self):
+        if self.on and self.volumeLevel > 1:
+            self.volumeLevel -= 1
