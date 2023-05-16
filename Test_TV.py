@@ -124,16 +124,27 @@ class Test_TV:
 
     #def for volume up command
     def volume_up(self):
-        self.tv.volume_Up()
-        self.channel_entry.delete(0, tkinter.END)
-        self.channel_entry.insert(0, str(self.tv.get_Volume_Level()))
+        if not self.tv.on:
+             messagebox.showinfo("Error", "Please turn on Power")
+        elif self.number_of_enter_volume== 0:
+            messagebox.showinfo("Error", "Please Enter Your Volume First")
+        else: 
+            self.tv.volume_Up()
+            self.channel_entry.delete(0, tkinter.END)
+            self.channel_entry.insert(0, str(self.tv.get_Volume_Level()))
 
     #def for volume down command
     def volume_down(self):
-        self.tv.volume_Down()
-        self.channel_entry.delete(0, tkinter.END)
-        self.channel_entry.insert(0, str(self.tv.get_Volume_Level()))
+        if not self.tv.on:
+             messagebox.showinfo("Error", "Please turn on Power")
+        elif self.number_of_enter_volume== 0:
+            messagebox.showinfo("Error", "Please Enter Your Volume First")
+        else:
+            self.tv.volume_Down()
+            self.channel_entry.delete(0, tkinter.END)
+            self.channel_entry.insert(0, str(self.tv.get_Volume_Level()))
 
+    #def for print command
     def prints(self):
          messagebox.showinfo("Volume and Channel","tv1's channel is "+ str(self.channel_entry.get())+ " and volume level is "+ str(self.volume_entry.get()))
 #starts the event loop of the GUI application
