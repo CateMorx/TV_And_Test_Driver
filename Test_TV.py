@@ -50,6 +50,12 @@ class Test_TV:
         self.volume_down_button = tkinter.Button(GUI, text="Volume Down", command=self.volume_down)
         self.volume_down_button.pack(pady=10)
 
+        self.prints = tkinter.Button(GUI, text="Print", command=self.prints)
+        self.prints.pack()
+
+        self.number_of_enter_channel = 0
+        self.number_of_enter_volume = 0
+
 #Def for button functions
     #def for power button command
     def toggle_power(self):
@@ -69,6 +75,7 @@ class Test_TV:
             if entry:
                 entry=int(self.channel_entry.get()) 
                 self.tv.set_Channel(entry)
+                self.number_of_enter_channel= 1
             elif not isinstance (entry, int):
                 raise TypeError
             else:
@@ -84,14 +91,25 @@ class Test_TV:
 
     #def for channel down command
     def channel_down(self):
-        self.tv.channel_Down()
-        self.channel_entry.delete(0, tkinter.END)
-        self.channel_entry.insert(0, str(self.tv.get_Channel()))
+        if not self.tv.on:
+             messagebox.showinfo("Error", "Please turn on Power")
+        elif self.number_of_enter_channel== 0:
+            messagebox.showinfo("Error", "Please Enter Your Channel First")
+        else: 
+            self.tv.channel_Down()
+            self.channel_entry.delete(0, tkinter.END)
+            self.channel_entry.insert(0, str(self.tv.get_Channel()))
 
     #def for enter volume command
     def enter_volume (self):
-        entry=int(self.volume_entry.get()) 
-        self.tv.set_Volume_Level(entry)
+        if not self.tv.on:
+             messagebox.showinfo("Error", "Please turn on Power")
+        elif self.number_of_enter_channel== 0:
+            messagebox.showinfo("Error", "Please Enter Your Channel First")
+        else:
+            entry=int(self.volume_entry.get()) 
+            self.tv.set_Volume_Level(entry)
+            self.number_of_enter_volume= 1
 
     #def for volume up command
     def volume_up(self):
@@ -104,6 +122,9 @@ class Test_TV:
         self.tv.volume_Down()
         self.channel_entry.delete(0, tkinter.END)
         self.channel_entry.insert(0, str(self.tv.get_Volume_Level()))
+
+    def prints(self):
+         messagebox.showinfo("Volume and Channel","tv1's channel is "+ str(self.channel_entry.get())+ " and volume level is "+ str(self.volume_entry.get()))
 #starts the event loop of the GUI application
 GUI = tkinter.Tk()
 GUI.title("TV Control Panel")
