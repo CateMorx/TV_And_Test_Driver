@@ -28,7 +28,13 @@ class TV:
             return self.channel
 
     #Create def that retrieves the value of volume
+    def get_Volume_Level(self):
+        return self.volumeLevel
     #Create def for setting volume value
+    def set_Volume_Level(self, volumeLevel):
+        if self.on and 1 <= volumeLevel <= 7:
+            self.volumeLevel = volumeLevel
+            return self.volumeLevel
     #Def that increases channel level by 1
     #Def that decreases channel level by 1
     #Def that increases volume level by 1
