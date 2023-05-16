@@ -50,10 +50,10 @@ class Test_TV:
         self.tv1.channel_enter= tkinter.Button(GUI, text="Enter", command=self.enter_volume)
         self.tv1.channel_enter.grid(row=8, column=0, padx=5, pady=5)
     # Volume Up and Down Buttons
-        self.volume_up_button = tkinter.Button(GUI, text="Volume Up", command=self.volume_up)
-        self.volume_up_button.grid(row=9, column=0, padx=5, pady=5)
-        self.volume_down_button = tkinter.Button(GUI, text="Volume Down", command=self.volume_down)
-        self.volume_down_button.grid(row=10, column=0, padx=5, pady=5)
+        self.tv1.volume_up_button = tkinter.Button(GUI, text="Volume Up", command=self.volume_up)
+        self.tv1.volume_up_button.grid(row=9, column=0, padx=5, pady=5)
+        self.tv1.volume_down_button = tkinter.Button(GUI, text="Volume Down", command=self.volume_down)
+        self.tv1.volume_down_button.grid(row=10, column=0, padx=5, pady=5)
 
      # Channel Label and Entry of TV2
         self.tv2.channel_label = tkinter.Label(GUI, text="Channel of TV 2")
@@ -69,13 +69,20 @@ class Test_TV:
         self.tv2.channel_down_button = tkinter.Button(GUI, text="Channel Down", command=self.channel_down_tv2)
         self.tv2.channel_down_button.grid(row=5, column=1, padx=5, pady=5)
 
-    # Volume Label and Entry
+    # Volume Label and Entry for TV 2
         self.tv2.volume_label = tkinter.Label(GUI, text="Volume of TV 2")
         self.tv2.volume_label.grid(row=6, column=1, padx=5, pady=5)
         self.tv2.volume_entry = tkinter.Entry(GUI)
         self.tv2.volume_entry.grid(row=7, column=1, padx=5, pady=5)
         self.tv2.channel_enter= tkinter.Button(GUI, text="Enter", command=self.enter_volume_tv2)
         self.tv2.channel_enter.grid(row=8, column=1, padx=5, pady=5)
+
+    # Volume Up and Down Buttons For TV 2
+        self.tv2.volume_up_button = tkinter.Button(GUI, text="Volume Up", command=self.volume_up_tv2)
+        self.tv2.volume_up_button.grid(row=9, column=1, padx=5, pady=5)
+        self.tv2.volume_down_button = tkinter.Button(GUI, text="Volume Down", command=self.volume_down_tv2)
+        self.tv2.volume_down_button.grid(row=10, column=1, padx=5, pady=5)
+
     #Print button
         self.prints = tkinter.Button(GUI, text="Print", command=self.prints)
         self.prints.grid(row=11, column=0, padx=5, pady=5)
@@ -217,25 +224,48 @@ class Test_TV:
             messagebox.showerror("TypeError", "Volume  for TV 2 must be an integer")
     #def for volume up command
     def volume_up(self):
-        if not self.tv.on:
+        if not self.tv1.on:
              messagebox.showinfo("Error", "Please turn on Power")
         elif self.number_of_enter_volume_tv1 == 0:
             messagebox.showinfo("Error", "Please Enter Your Volume First")
         else: 
-            self.tv.volume_Up()
-            self.volume_entry.delete(0, tkinter.END)
-            self.volume_entry.insert(0, str(self.tv.get_Volume_Level()))
+            self.tv1.volume_Up()
+            self.tv1.volume_entry.delete(0, tkinter.END)
+            self.tv1.volume_entry.insert(0, str(self.tv1.get_Volume_Level()))
 
     #def for volume down command
     def volume_down(self):
-        if not self.tv.on:
+        if not self.tv1.on:
              messagebox.showinfo("Error", "Please turn on Power")
         elif self.number_of_enter_volume_tv1 == 0:
             messagebox.showinfo("Error", "Please Enter Your Volume First")
         else:
-            self.tv.volume_Down()
-            self.volume_entry.delete(0, tkinter.END)
-            self.volume_entry.insert(0, str(self.tv.get_Volume_Level()))
+            self.tv1.volume_Down()
+            self.tv1.volume_entry.delete(0, tkinter.END)
+            self.tv1.volume_entry.insert(0, str(self.tv1.get_Volume_Level()))
+
+        #def for volume up command
+    def volume_up_tv2(self):
+        if not self.tv2.on:
+             messagebox.showinfo("Error", "Please turn on Power")
+        elif self.number_of_enter_volume_tv1 == 0:
+            messagebox.showinfo("Error", "Please Enter Your Volume First")
+        else: 
+            self.tv2.volume_Up()
+            self.tv2.volume_entry.delete(0, tkinter.END)
+            self.tv2.volume_entry.insert(0, str(self.tv2.get_Volume_Level()))
+
+    #def for volume down command
+    def volume_down_tv2(self):
+        if not self.tv2.on:
+             messagebox.showinfo("Error", "Please turn on Power")
+        elif self.number_of_enter_volume_tv1 == 0:
+            messagebox.showinfo("Error", "Please Enter Your Volume First")
+        else:
+            self.tv2.volume_Down()
+            self.tv2.volume_entry.delete(0, tkinter.END)
+            self.tv2.volume_entry.insert(0, str(self.tv2.get_Volume_Level()))
+
 
     #def for print command
     def prints(self):
