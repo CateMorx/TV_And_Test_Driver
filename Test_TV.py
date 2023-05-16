@@ -19,10 +19,36 @@ class Test_TV:
         GUI.title("TV Control Panel")\
         
         self.tv = TV()
-        
+
     #Power button
+        self.power_button = tkinter.Button(GUI, text="Power: Off", command=self.toggle_power)
+        self.power_button.pack(pady=10)
     # Channel Label and Entry
+        self.channel_label = tkinter.Label(GUI, text="Channel")
+        self.channel_label.pack()
+        self.channel_entry = tkinter.Entry(GUI)
+        self.channel_entry.pack()
+        self.channel_enter= tkinter.Button(GUI, text="Enter", command=self.enter_channel)
+        self.channel_enter.pack(pady=10)
     # Channel Up and Down Buttons
     # Volume Label and Entry
     # Volume Up and Down Buttons
 #Def for button functions
+    #def for power button command
+    def toggle_power(self):
+        if self.tv.on:
+            self.tv.turn_Off()
+            self.power_button.config(text="Power: Off")
+        else:
+            self.tv.turn_On()
+            self.power_button.config(text="Power: On")
+    
+    #def for enter channel command
+    def enter_channel (self):
+        entry=int(self.channel_entry.get()) 
+        self.tv.set_Channel(entry)
+
+#starts the event loop of the GUI application
+GUI = tkinter.Tk()
+testTV = Test_TV(GUI)
+GUI.mainloop()
