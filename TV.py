@@ -23,9 +23,21 @@ class TV:
         return self.channel
     #Create def for setting channel value
     def set_Channel(self, channel):
-        if self.on and 1 <= channel <= 120:
-            self.channel = channel
-            return self.channel
+        try:
+            if not isinstance(channel, int):
+                raise TypeError
+            elif not (1 <= channel <= 120):
+                raise ValueError
+            elif not channel:
+                raise ValueError
+        except TypeError:
+            print ("Channel must be an integer")
+        except ValueError:
+            print("Channel must be between 1-120")
+        else:
+            if self.on and 1 <= channel <= 120:
+                self.channel = channel
+                return self.channel
 
     #Create def that retrieves the value of volume
     def get_Volume_Level(self):
